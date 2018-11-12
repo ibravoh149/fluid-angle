@@ -5,7 +5,7 @@ dotenv.config();
 const config = {
   "development": {
     "username":process.env.DEV_DB_USERNAME,
-    "password": null,
+    "password": process.env.DEV_DB_PASSWORD,
     "database": process.env.DEV_DB_NAME,
     "host": "127.0.0.1",
     "dialect": "postgres"
