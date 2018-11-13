@@ -13,6 +13,7 @@
     "undo:migrate:test": "cross-env NODE_ENV=test sequelize db:migrate:undo:all",
     "run:test": "npm run undo:migrate:test && npm run migrate:test  && npm run test:dev",
     "seed": "sequelize db:seed:all",
+    "coveralls": "nyc report --reporter=text-lcov | coveralls",
     "test:dev": "cross-env NODE_ENV=test mocha  --compilers js:babel-register --timeout 500000",
     "test": "npm run run:test",
     "prebuild": "rm -rf dist/*",
