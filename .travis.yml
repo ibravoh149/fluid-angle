@@ -1,11 +1,32 @@
+# language: node_js
+# node_js:
+#   - "8.12.0"
+# addons:
+#     code_climate:
+#         repo_token: "sVSir/K1FQKJI/12IDEsa+cqr+S3Nw2mydTHRf+3PG+e2pLxRyXtzsbIehjIqxla/jY09rhNsY21vXXR5+ojhxjAacwdgw+e+s+z6oU/dpZtA1gyZ2sJdLgFi/nxmPAdIdX0Qq0L9HVZD60OmfyjBPqCLn6dLQ3+BrUu1EXzqbXSGxY6h7ZnTTXk6YvSIV9/F5/AoEPZLJXctgZewNNj+xrDEUgAK1Xxu2vdge/Rl7mvskUXrYo+WB/tQq160pl5f5Bmi18Qxq/wWjrCmWDhAwSpECWWXPxbu2Gfr+T6+JK/VSXwdUDAMuMcbw4LUUWKCBswukNsXRlm3BDXe/azxbY1ftCGZfDSDV4Lm4q8ZxOFz++dT1qV9hmUDQI2tTTfG9OJCFqtxGnR9JUNKVclCXvE66rFiUBrm0adAxYyGisN6JBsfMhxwdQIcQwaK6xEF5n1HE0od8U7OeAz0rXqf/vpCHVPZyK2V2ELsIb5tY6A1Nu3woqaPpWSPrNIlWoZnvgdq9AhFd9N+JQypG6M5eIAGK5tUBMiJjUqecgLDzHEeC0NnXzGZDDOGA0AhrdtU2j0Zlw0sU+1fEvKrjF4yEAeyb4WLe0lrhCXyDOV2QS2wC0M5sJT/8J1px0jjcwF8GgYrdmZy9dqAn8Ljd9ZVMvnFgcYXZNN4ZOgQItmLJA="
+# script: istanbul cover npm test -- -R spec
+# before_script:
+#   - npm install codeclimate-test-reporter istanbul -g
+# after_script:
+#   - codeclimate-test-reporter < ./coverage/lcov.info
+
 language: node_js
 node_js:
-  - "8.12.0"
-addons:
-    code_climate:
-        repo_token: "sVSir/K1FQKJI/12IDEsa+cqr+S3Nw2mydTHRf+3PG+e2pLxRyXtzsbIehjIqxla/jY09rhNsY21vXXR5+ojhxjAacwdgw+e+s+z6oU/dpZtA1gyZ2sJdLgFi/nxmPAdIdX0Qq0L9HVZD60OmfyjBPqCLn6dLQ3+BrUu1EXzqbXSGxY6h7ZnTTXk6YvSIV9/F5/AoEPZLJXctgZewNNj+xrDEUgAK1Xxu2vdge/Rl7mvskUXrYo+WB/tQq160pl5f5Bmi18Qxq/wWjrCmWDhAwSpECWWXPxbu2Gfr+T6+JK/VSXwdUDAMuMcbw4LUUWKCBswukNsXRlm3BDXe/azxbY1ftCGZfDSDV4Lm4q8ZxOFz++dT1qV9hmUDQI2tTTfG9OJCFqtxGnR9JUNKVclCXvE66rFiUBrm0adAxYyGisN6JBsfMhxwdQIcQwaK6xEF5n1HE0od8U7OeAz0rXqf/vpCHVPZyK2V2ELsIb5tY6A1Nu3woqaPpWSPrNIlWoZnvgdq9AhFd9N+JQypG6M5eIAGK5tUBMiJjUqecgLDzHEeC0NnXzGZDDOGA0AhrdtU2j0Zlw0sU+1fEvKrjF4yEAeyb4WLe0lrhCXyDOV2QS2wC0M5sJT/8J1px0jjcwF8GgYrdmZy9dqAn8Ljd9ZVMvnFgcYXZNN4ZOgQItmLJA="
-script: istanbul cover npm test -- -R spec
+ - "6.10.3" 
+env:
+ - NODE_ENV=test                   
 before_script:
-  - npm install codeclimate-test-reporter istanbul -g
-after_script:
-  - codeclimate-test-reporter < ./coverage/lcov.info
+ - npm install
+ - npm install -g codeclimate-test-reporter
+cache:
+ directories:
+   - "node_modules"     
+script:
+ - npm test  
+after_success:
+#  - npm run coveralls
+ - codeclimate-test-reporter < ./coverage/lcov.info
+addons:
+ code_climate:
+   repo_token:
+secure: 5882c591015aaf0ee4d8c1f3cdac9be0ee507f999a7b0d83053264b61a24da5e
