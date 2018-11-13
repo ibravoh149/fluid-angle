@@ -4,7 +4,19 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon  ./server/app --watch ./server --exec babel-node"
+    "start": "nodemon  ./server/app --watch ./server --exec babel-node",
+    "migrate": "sequelize db:migrate && npm run seed",
+    "migrate:prod": "cross-env NODE_ENV=production sequelize db:migrate && npm run seed:prod",
+    "migrate:test": "cross-env NODE_ENV=test sequelize db:migrate",
+    "undo:migrate": "sequelize db:migrate:undo:all",
+    "undo:migrate:prod": "cross-env NODE_ENV=production sequelize db:migrate:undo:all",
+    "undo:migrate:test": "cross-env NODE_ENV=test sequelize db:migrate:undo:all",
+    "run:test": "npm run undo:migrate:test && npm run migrate:test  && npm run test:dev",
+    "seed": "sequelize db:seed:all",
+    "test:dev": "cross-env NODE_ENV=test mocha  --compilers js:babel-register --timeout 500000",
+    "test": "npm run run:test",
+    "prebuild": "rm -rf dist/*",
+    "build:prod": "npm run prebuild && babel -d ./dist/server ./server -s"
   },
   "keywords": [],
   "author": "",
@@ -67,6 +79,7 @@
     "shortid": "^2.2.11",
     "socket.io": "^2.1.1",
     "supertest": "^3.0.0",
+    "travis": "^0.1.1",
     "validate-password": "^1.0.4",
     "validator": "^9.0.0",
     "webpack": "^3.10.0"
@@ -88,6 +101,7 @@
     "faker": "^4.1.0",
     "favicons-webpack-plugin": "0.0.9",
     "fetch-mock": "^6.0.0",
+    "istanbul": "^0.4.5",
     "jest": "^22.1.4",
     "jsdoc": "^3.5.5",
     "moxios": "^0.4.0",

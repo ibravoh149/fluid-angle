@@ -60,7 +60,7 @@ app.use(expressValidator({
 
 app.use(passport.initialize());
 
-app.use('/v1', api);
+app.use('/api', api);
 
 app.use('/', function(req, res){
     res.statusCode = 200;
