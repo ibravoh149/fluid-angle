@@ -86,44 +86,44 @@ describe('Users Controller', () => {
   });
 
 
-  // describe('Signin user POST: /api/v1/groove/users/local/signin', () => {
-  //   it('should successfully log in a registered user', (done) => {
-  //     request
-  //       .post('/api/v1/groove/users/local/signin')
-  //       .send(validUser)
-  //       .expect(200)
-  //       .end((err, res) => {
-  //         if (err) return done(err);
-  //         expect(res.body.userInfo.email).to.equal(validUser.email);
-  //         done();
-  //       });
-  //   });
-  //   it('should return a 400 error if password field is empty', (done) => {
-  //     request
-  //       .post('/api/v1/groove/users/local/signin')
-  //       .send(userWithNoPassword)
-  //       .end((err, res) => {
-  //         if (err) return done(err);
-  //         expect(res.body.message[0].msg)
-  //           .to
-  //           .equal('Password can\'t be empty.');
-  //         expect(res.status).to.equal(400);
-  //         done();
-  //       });
-  //   });
-  //   it('should return a 400 error if email field is empty', (done) => {
-  //     request
-  //       .post('/api/v1/groove/users/local/signin')
-  //       .send(userWithNoEmail)
-  //       .end((err, res) => {
-  //         if (err) return done(err);
-  //         expect(res.body.message[0].msg)
-  //           .to
-  //           .equal('Enter a valid email address.');
-  //         expect(res.status).to.equal(400);
-  //         done();
-  //       });
-  //   });
-  // });
+  describe('Signin user POST: /api/user/signin', () => {
+    it('should successfully log in a registered user', (done) => {
+      request
+        .post('/api/user/signin')
+        .send(validUser)
+        .expect(200)
+        .end((err, res) => {
+          if (err) return done(err);
+          expect(res.body.user.email).to.equal(validUser.email);
+          done();
+        });
+    });
+    it('should return a 400 error if password field is empty', (done) => {
+      request
+        .post('/api/user/signin')
+        .send(userWithNoPassword)
+        .end((err, res) => {
+          if (err) return done(err);
+          expect(res.body.message[0].msg)
+            .to
+            .equal('Password can\'t be empty.');
+          expect(res.status).to.equal(400);
+          done();
+        });
+    });
+    it('should return a 400 error if email field is empty', (done) => {
+      request
+        .post('/api/user/signin')
+        .send(userWithNoEmail)
+        .end((err, res) => {
+          if (err) return done(err);
+          expect(res.body.message[0].msg)
+            .to
+            .equal('Enter a valid email address.');
+          expect(res.status).to.equal(400);
+          done();
+        });
+    });
+  });
 
 });
