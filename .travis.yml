@@ -21,8 +21,8 @@ before_script:
 cache:
  directories:
    - "node_modules"     
-script:
- - npm test  
+# script:
+#  - npm test  
 after_success:
 #  - npm run coveralls
  - codeclimate-test-reporter < ./coverage/lcov.info
