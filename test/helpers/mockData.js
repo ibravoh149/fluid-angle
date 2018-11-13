@@ -53,7 +53,7 @@ export const insertUserSeed = () => {
  *
  * @returns {void} Nothing
  */
-export const insertEventSeed = () => {
+export const insertContactSeed = () => {
   contact.bulkCreate(contacts);
 };
 
@@ -65,18 +65,18 @@ export const insertEventSeed = () => {
  *
  * @returns {string} token - Generated token
  */
-const generateToken = (id) => {
- const {JWT_SECRET_KEY } = process.env;
+
+const generateToken = (id, email) => {
+ const {JWT_SECRET_KEY, JWT_EXPIRATION } = process.env;
   const token = jsonwebtoken.sign({
-    iss : 'grooveng',
-    sub:id,
-    expiresIn:84640
-  }, JWT_SECRET_KEY);
+    sub: id,
+    email: email,
+}, JWT_SECRET_KEY,{expiresIn:Number(JWT_EXPIRATION)});
   return token;
 };
 
-export const user1token = generateToken(2);
-export const user2token = generateToken(3);
+export const user1token = generateToken(1, 'convicmusic@gmail.com');
+export const user2token = generateToken(3,'convictmusic@gmail.com');
 
 export const validUser = {
   
@@ -85,15 +85,17 @@ export const validUser = {
   confirmPassword: 'simple',
 	password: 'simple',
 	createdAt: Date.now(),
-	updatedAt: Date.now(),
+  updatedAt: Date.now(),
 };
 
 export const validContact = {
-	phone:"80948447",
+	phone:"809484476",
 	contactName:'de don',
 	isStarred:false,
 	createdAt: Date.now(),
-	updatedAt: Date.now()
+  updatedAt: Date.now(),
+  userId:1
+  
 };
 
 export const contactWithNoContactName = {
@@ -101,7 +103,8 @@ export const contactWithNoContactName = {
 		contactName:'',
 		isStarred:false,
     createdAt: Date.now(),
-    updatedAt: Date.now()
+    updatedAt: Date.now(),
+    userId:2
  };
 
  export const contactWithNoPhone = {
@@ -110,7 +113,9 @@ export const contactWithNoContactName = {
 	contactName:'ifueniwfo',
 	isStarred:false,
 	createdAt: Date.now(),
-	updatedAt: Date.now()
+  updatedAt: Date.now(),
+  userId:2
+  
 };
 
 
