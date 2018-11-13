@@ -16,11 +16,6 @@ import api from './routes/index';
 
 const http = require('http');
 
-
-
-
-
-
 const expressValidator = require('express-validator');
 
 
@@ -33,8 +28,6 @@ app.use(express.static(path.join(__dirname, '../dist/client/public')));
 
 
 app.set('port', port);
-
-
 
 
 app.use(logger('dev'));
@@ -66,14 +59,6 @@ app.use('/', function(req, res){
     res.statusCode = 200;
     res.json({status:"success", message:"refer to the awesome API", data:{}})
 });
-
-cron.schedule('* * * * * 7', () => {
-   helper.resetWeeklyLimit();
-});
-
-// cron.schedule('10 * * * * *', () => {
-//     Job.backUpDb();
-// });
 
 
 

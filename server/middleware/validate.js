@@ -87,13 +87,11 @@ const validator = {
   },
 
 
-  
-
   // validates adding contacts
   validateAddContact(request, response) {
     request
       .checkBody("contactName", "contact name can't be empty.")
-      .isLength({ min: 5 });
+      .notEmpty()
 
     request
       .checkBody("phone", "Phone number cannot be empty.")
@@ -105,9 +103,9 @@ const validator = {
   validateEditContact(request, response) {
     request
     .checkBody("contactName", "contact name can't be empty.")
-    .isLength({ min: 5 });
+    .notEmpty()
 
-  request
+    request
     .checkBody("phone", "Phone number cannot be empty.")
     .notEmpty();
 
