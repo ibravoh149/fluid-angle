@@ -93,34 +93,21 @@ describe('Contact Controller', () => {
 
 //   //  user contact test suite
 
-// describe('Gets all contacts added by the Authenticated user Get: /api/v1/groove/users/:id/events', ()=>{
-//   it('should return events of the current user', (done) => {
-//           request
-//             .get(`/api/v1/groove/users/2/events`)
-//             .set({ authorization: token })
-//             .expect(200)
-//             .end((err, res) => {
-//               if (err) return done(err);
-//               expect(res.body.events.length).to.equal(2);
-//               done();
-//             });
-//         });
+describe('Gets contacts added by the Authenticated user Get: /api/v1/groove/users/:id/events', ()=>{
+    
+    it('should return contacts of the current user', (done) => {
+          request
+            .get(`/api/contact/`)
+            .set({ authorization: token })
+            .expect(200)
+            .end((err, res) => {
+              if (err) return done(err);
+              expect(res.body.contacts.length).to.equal(3);
+              done();
+            });
+        });
 
-//   it('should return a 401 error if the user ID supplied is not authenticated',
-//   (done) => {
-//     request
-//       .get(`/api/v1/groove/users/98/events`)
-//       .set({ authorization: token })
-//       .expect(401)
-//       .end((err, res) => {
-//         if (err) return done(err);
-//         expect(res.body.message)
-//           .to
-//           .equal('User id supplied is not authenticated');
-//         done();
-//       });
-//   });
-// });
+});
 
 
  

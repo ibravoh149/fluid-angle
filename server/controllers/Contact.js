@@ -27,7 +27,7 @@ class Contact{
                 return res.status(409).json({message:"This contact already exists"});
             }
            
-            let contact = await db.contact.create({contactName, phone, userId});
+            let contact = await db.contact.create({contactName, phone, userId,isStarred:false});
 
             if(contact){
                 return res.status(201).json({contact})
@@ -38,5 +38,26 @@ class Contact{
             return res.status(500).json({message:"internal server error"})
         }
     }
+
+    static async getMyContacts(req, res){
+        const userId = req.user.id;
+
+        try {
+            let contacts = await db.contact.findAll({where:{userId}});
+            if(contacts.length < 1){
+                return res.status(404).json({message:"You have no contacts saved"})
+
+            }
+
+            return res.status(200).json({contacts})
+
+        } catch (error) {
+             console.log(error)
+            return res.status(500).json({message:"internal server error"})
+        }
+
+    }
+
+    
 }
 export default Contact;

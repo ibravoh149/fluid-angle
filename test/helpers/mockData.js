@@ -108,7 +108,6 @@ export const contactWithNoContactName = {
  };
 
  export const contactWithNoPhone = {
-
 	phone:"",
 	contactName:'ifueniwfo',
 	isStarred:false,
