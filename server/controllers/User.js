@@ -71,5 +71,41 @@ class User{
            }
             
         }
+
+        static async login(req, res){
+            validate.validateLogin(req, res);
+            const errors = req.validationErrors();
+            if (errors) {
+                return res.status(400).json({
+                    message: errors
+                });
+            }
+    
+            try {
+                const { email, password } = req.body;
+                let user = await db.user.findOne({where:{email}});
+                if (user && password
+                    && validate.comparePassword(password, user.password)
+                ) {
+                    
+                    const token = jwt.sign({
+                        sub: user.id,
+                        email: user.email,
+                    }, secretKey,{expiresIn:expireIn});
+    
+                    return res.status(200).json({
+                        token,
+                        user
+                    });
+                }else {
+                    res.status(401).json({
+                        message: 'Email or Password Incorrect'
+                    });
+                }
+            } catch (error) {
+               console.log(error)
+                
+            }
+        }
 }
 export default User
